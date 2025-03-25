@@ -1,3 +1,5 @@
+![API Development](https://img.shields.io/badge/API%20Development-%20FastAPI%20|%20REST%20|%20Unit%20Tests%20-blue)
+
 # 🚀 FastAPI Template Project
 
 A production-ready, modular FastAPI backend template with:
