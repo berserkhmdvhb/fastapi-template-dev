@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 def create_item(item_data: ItemCreate):
     db: Session = SessionLocal()
-    db_item = Item(**item_data.dict())
+    db_item = Item(**item_data.model_dump())
     db.add(db_item)
     db.commit()
     db.refresh(db_item)
