@@ -1,4 +1,6 @@
-![API Development](https://img.shields.io/badge/API%20Development-%20FastAPI%20|%20REST%20-blue)
+![API](https://img.shields.io/badge/API-FastAPI%20%7C%20REST-blue)
+![Language](https://img.shields.io/badge/Language-Python%203.9+-yellow)
+![Database](https://img.shields.io/badge/Database-SQLite%20%7C%20SQLAlchemy-green)
 
 # 🚀 FastAPI Template Project
 
