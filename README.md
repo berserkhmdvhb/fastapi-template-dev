@@ -71,7 +71,7 @@ Run all tests:
 pytest
 ```
 
-All tests currently pass ✅. Test files cover:
+All tests currently pass. Test files cover:
 - Auth behavior
 - CRUD endpoints
 - Error cases (missing tokens, invalid routes)
