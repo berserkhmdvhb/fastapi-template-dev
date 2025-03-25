@@ -39,6 +39,7 @@ fastapi-template-dev/
 ---
 ## 📊 Diagram
 
+### Overview
 
 ```mermaid
 graph TD
@@ -61,7 +62,45 @@ graph TD
     %% Database
     ORM --> DB["🗄️ SQLite Database (test.db)"]
 ```
+### Request Flow
 
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Browser as 🧑‍💻 Browser (User)
+    participant OS as 🖥️ Operating System
+    participant Uvicorn as 🌀 Uvicorn (ASGI Server)
+    participant FastAPI as 🚀 FastAPI App
+    participant App as 🧠 Route Function (e.g. /items)
+
+    Note over Browser: User visits http://127.0.0.1:8000/api/v1/items
+
+    Browser->>OS: Send HTTP GET request
+    OS->>Uvicorn: Deliver TCP packet with HTTP request
+
+    Note over Uvicorn: Uvicorn listens on 127.0.0.1:8000
+    Uvicorn->>Uvicorn: Parse HTTP method and route
+    Uvicorn->>FastAPI: Call FastAPI ASGI app
+
+    FastAPI->>FastAPI: Match route: GET /api/v1/items
+    FastAPI->>FastAPI: Inject dependencies (e.g. get_current_user)
+    FastAPI->>App: Call endpoint function
+
+    App->>DB: Read from SQLite via SQLAlchemy
+    DB-->>App: Return queried items
+
+    App-->>FastAPI: Return Python list of dicts
+
+    FastAPI->>FastAPI: Serialize to JSON
+    FastAPI->>Uvicorn: Send response body + headers
+
+    Uvicorn->>OS: Compose HTTP response
+    OS->>Browser: Return HTTP 200 + JSON payload
+
+    Browser->>Browser: Render JSON in UI
+
+    Note over Browser,App: End-to-end request/response cycle
+```
 ---
 ## 🧪 Tests
 
