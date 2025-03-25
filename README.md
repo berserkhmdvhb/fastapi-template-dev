@@ -71,39 +71,38 @@ graph TD
 ```mermaid
 sequenceDiagram
     autonumber
-    participant Browser as 🧑‍💻 Browser (User)
-    participant OS as 🖥️ Operating System
+    participant Client as 🧑‍💻 Browser (User)
     participant Uvicorn as 🌀 Uvicorn (ASGI Server)
     participant FastAPI as 🚀 FastAPI App
-    participant App as 🧠 Route Function (e.g. /items)
+    participant Router as 🔁 items.py (Router)
+    participant Auth as 🔐 get_current_user (Dependency)
+    participant Service as 🧠 item_service.py
+    participant Session as 🔗 db.session (Session)
+    participant Model as 🧱 Item (Model)
+    participant SQLite as 🗄️ SQLite DB
 
-    Note over Browser: User visits http://127.0.0.1:8000/api/v1/items
+    Note over Client: User sends GET /api/v1/items
 
-    Browser->>OS: Send HTTP GET request
-    OS->>Uvicorn: Deliver TCP packet with HTTP request
+    Client->>Uvicorn: HTTP request to /api/v1/items
+    Uvicorn->>FastAPI: Pass ASGI scope
 
-    Note over Uvicorn: Uvicorn listens on 127.0.0.1:8000
-    Uvicorn->>Uvicorn: Parse HTTP method and route
-    Uvicorn->>FastAPI: Call FastAPI ASGI app
+    FastAPI->>Router: Route match: /api/v1/items
+    Router->>Auth: Validate auth token (Depends)
+    Auth-->>Router: Valid user or HTTP 401
 
-    FastAPI->>FastAPI: Match route: GET /api/v1/items
-    FastAPI->>FastAPI: Inject dependencies (e.g. get_current_user)
-    FastAPI->>App: Call endpoint function
+    Router->>Service: Call get_all_items()
+    Service->>Session: Open DB session
+    Service->>Model: ORM query (Item.query.all)
+    Model->>SQLite: SELECT * FROM items
+    SQLite-->>Model: Return rows
+    Model-->>Service: List[Item]
 
-    App->>DB: Read from SQLite via SQLAlchemy
-    DB-->>App: Return queried items
+    Service->>Session: Close session
+    Service-->>Router: Return List[ItemRead]
+    Router-->>FastAPI: Response (200 + JSON)
 
-    App-->>FastAPI: Return Python list of dicts
-
-    FastAPI->>FastAPI: Serialize to JSON
-    FastAPI->>Uvicorn: Send response body + headers
-
-    Uvicorn->>OS: Compose HTTP response
-    OS->>Browser: Return HTTP 200 + JSON payload
-
-    Browser->>Browser: Render JSON in UI
-
-    Note over Browser,App: End-to-end request/response cycle
+    FastAPI->>Uvicorn: Send HTTP response
+    Uvicorn->>Client: Return JSON list
 ```
 ---
 ## 🧪 Tests
