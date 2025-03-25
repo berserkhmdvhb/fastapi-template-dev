@@ -38,31 +38,31 @@ fastapi-template-dev/
 
 ---
 ## 📊 Diagram
-```mermaid
+<details> <summary>Click to expand diagram</summary>
+mermaid
+Copy
+Edit
 graph TD
-  subgraph Entry Point
-    R1[run.py] --> UV[Uvicorn Server]
-    UV --> A1[app.main.py]
-  end
+  %% Entry Point
+  Run[run.py] -->|launches| Uvicorn[Uvicorn Server]
+  Uvicorn --> AppMain[app.main.py (FastAPI App)]
 
-  subgraph FastAPI App
-    A1 -->|Includes| Router[items.py (v1)]
-    A1 --> Settings[config.py]
-  end
+  %% App Layer
+  AppMain --> Router[api.v1.items.py]
+  AppMain --> Settings[core.config.py]
 
-  subgraph Router Layer
-    Router --> SC[schemas.item.py]
-    Router --> SR[services.item_service.py]
-    Router --> DEP[dependencies.auth.py]
-  end
+  %% Router Layer
+  Router --> Schemas[schemas.item.py]
+  Router --> Service[services.item_service.py]
+  Router --> Auth[dependencies.auth.py]
 
-  subgraph Service Layer
-    SR --> DBSession[db.session.py]
-    SR --> ORM[models.item.py]
-  end
+  %% Service Layer
+  Service --> Session[db.session.py]
+  Service --> ORM[models.item.py]
 
-  ORM --> SQLite[(SQLite Database)]
-```
+  %% Database
+  ORM --> DB[(SQLite Database)]
+</details>
 ---
 ## 🧪 Tests
 
