@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>5fe5d392-c6b0-4cef-964e-8a82b87e91f8</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>test_main.py</StartupFile>
+    <StartupFile>tests\test_main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,31 +22,31 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="app\api\v1\items.py" />
-    <Compile Include="app\core\config.py" />
-    <Compile Include="app\db\session.py" />
-    <Compile Include="app\dependencies\auth.py" />
-    <Compile Include="app\main.py" />
-    <Compile Include="app\models\item.py" />
-    <Compile Include="app\schemas\item.py" />
-    <Compile Include="app\services\item_service.py" />
-    <Compile Include="test_main.py" />
-    <Compile Include="main.py" />
-    <Compile Include="source\scripts\initialize_db.py" />
+    <Compile Include="src\run.py" />
+    <Compile Include="src\app\api\v1\items.py" />
+    <Compile Include="src\app\core\config.py" />
+    <Compile Include="src\app\db\session.py" />
+    <Compile Include="src\app\dependencies\auth.py" />
+    <Compile Include="src\app\main.py" />
+    <Compile Include="src\app\models\item.py" />
+    <Compile Include="src\app\schemas\item.py" />
+    <Compile Include="src\app\services\item_service.py" />
+    <Compile Include="tests\test_main.py" />
+    <Compile Include="src\scripts\initialize_db.py" />
     <Compile Include="tests\test_items.py" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\" />
-    <Folder Include="app\api\" />
-    <Folder Include="app\api\v1\" />
-    <Folder Include="app\core\" />
-    <Folder Include="app\db\" />
-    <Folder Include="app\dependencies\" />
-    <Folder Include="app\models\" />
-    <Folder Include="app\schemas\" />
-    <Folder Include="app\services\" />
-    <Folder Include="source\" />
-    <Folder Include="source\scripts\" />
+    <Folder Include="src\app\" />
+    <Folder Include="src\app\api\" />
+    <Folder Include="src\app\api\v1\" />
+    <Folder Include="src\app\core\" />
+    <Folder Include="src\app\db\" />
+    <Folder Include="src\app\dependencies\" />
+    <Folder Include="src\app\models\" />
+    <Folder Include="src\app\schemas\" />
+    <Folder Include="src\app\services\" />
+    <Folder Include="src\" />
+    <Folder Include="src\scripts\" />
     <Folder Include="tests\" />
   </ItemGroup>
   <ItemGroup>

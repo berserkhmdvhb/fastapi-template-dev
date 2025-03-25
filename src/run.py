@@ -1,6 +1,4 @@
 from app.main import app
-
-# This is just the launcher if you want to use `python main.py`
 import uvicorn
 
 if __name__ == "__main__":
