@@ -41,8 +41,6 @@ fastapi-template-dev/
 
 
 ```mermaid
-Copy
-Edit
 graph TD
   %% Entry Point
   Run[run.py] -->|launches| Uvicorn[Uvicorn Server]
