@@ -38,7 +38,7 @@ fastapi-template-dev/
 
 ---
 ## 📊 Diagram
-<details> <summary>Click to expand diagram</summary>
+<summary>Click to expand diagram</summary>
 ```mermaid
 Copy
 Edit
@@ -63,7 +63,6 @@ graph TD
   %% Database
   ORM --> DB[(SQLite Database)]
   ```
-</details>
 ---
 ## 🧪 Tests
 
