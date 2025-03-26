@@ -13,6 +13,8 @@ A production-ready, modular FastAPI backend template with:
 - Pytest test suite with 100% passing tests
 - Future-ready: Docker, OAuth2, Alembic, deployment support
 
+The design was adhered as much as possible to [Best Practices](https://github.com/berserkhmdvhb/API_Python_Test/tree/main/BestPractices).
+
 ---
 
 ## 🗂️ Project Structure
@@ -147,9 +149,16 @@ python src/scripts/initialize_db.py
 ```
 
 ### 4. Run the Server
+In terminal, run following: 
 
 ```bash
 uvicorn app.main:app --reload --app-dir src
+```
+
+You can also simply run following command instead:
+
+```bash
+python run.py
 ```
 
 Open browser:
