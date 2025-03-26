@@ -1,25 +1,13 @@
-`Development History`
+# Structure Details
 
-After project is initiated, it only contained `items` as resources. To add another resource `users` and establish relationship within `users` and `items`, the following steps were followed:
-
-1. Model
-Add a new User model in models/user.py
-
-Add a foreign key in Item pointing to User
-
-2. Schemas
-Create UserCreate, UserRead, and optionally UserWithItems schemas
-
-3. Router
-Create users.py under api/v1/
-
-Add endpoints for: POST /users, GET /users, GET /users/{id}
-
-4. Service Layer
-Add user_service.py with logic for user creation and retrieval
-
-5. Dependency
-Simulate get_current_user() to return a real user from the DB (instead of string)
-
-6. Test
-Create test_users.py to test user creation and relationships
+| Folder         | Purpose                                         | Key Concepts Used                   |
+|----------------|--------------------------------------------------|--------------------------------------|
+| `api/`         | HTTP route handlers                             | FastAPI routing                      |
+| `core/`        | App settings, global config                     | Pydantic `BaseSettings`              |
+| `db/`          | DB connection & base class                      | SQLAlchemy `Session`, declarative base |
+| `dependencies/`| Injectable shared logic (auth, pagination, etc) | FastAPI `Depends()`                  |
+| `models/`      | SQLAlchemy models (tables)                      | ORM, relationships                   |
+| `schemas/`     | Pydantic models for I/O                         | Validation, serialization            |
+| `services/`    | Business logic (create, query, etc.)            | Decoupled logic layer                |
+| `scripts/`     | CLI tools (e.g., DB init)                       | `sys.path`, `Base.metadata`          |
+| `tests/`       | Pytest-based tests                              | Unit tests, integration tests        |
