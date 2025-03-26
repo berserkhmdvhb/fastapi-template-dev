@@ -1,75 +1,102 @@
 Besides unit tests, one can test endpoints with following CURL commands:
 
+# 🧪 FastAPI CRUD API Test Commands (PowerShell Compatible)
 
-# 🧪 API Endpoint Tests (via `curl` - PowerShell Compatible)
+This markdown file documents how to test your FastAPI CRUD endpoints using `Invoke-RestMethod` in PowerShell (instead of Bash `curl`).  
+Make sure your FastAPI server is running at [http://localhost:8000](http://localhost:8000).
 
-Make sure your server is running locally at `http://localhost:8000`.
+---
 
-> 🔐 All protected routes require this header:
-```
--H "token: fake-super-secret-token"
+## 🔐 Authentication Header
+
+> All authenticated endpoints require this header:
+
+```powershell
+"token" = "fake-super-secret-token"
 ```
 
 ---
 
-## ✅ Create Item (POST `/api/v1/items`)
+## 📦 Items Endpoints
+
+### ✅ Create Item (POST `/api/v1/items`)
 
 ```powershell
-curl -X POST "http://localhost:8000/api/v1/items" `
-     -H "Content-Type: application/json" `
-     -H "token: fake-super-secret-token" `
-     -d '{"name": "Notebook", "description": "A lined paper notebook"}'
+Invoke-RestMethod -Uri "http://localhost:8000/api/v1/items" `
+  -Method Post `
+  -Headers @{
+    "Content-Type" = "application/json"
+    "token" = "fake-super-secret-token"
+  } `
+  -Body '{"name": "Notebook", "description": "A lined paper notebook"}'
 ```
 
 ---
 
-## 📋 List All Items (GET `/api/v1/items`)
+### 📃 Get All Items (GET `/api/v1/items`)
 
 ```powershell
-curl -X GET "http://localhost:8000/api/v1/items" `
-     -H "token: fake-super-secret-token"
-```
-
-## 📋 List Items with Filters (Query Parameters)
-
-```powershell
-curl -X GET "http://localhost:8000/api/v1/items?name=note&description=lined" `
-     -H "token: fake-super-secret-token"
+Invoke-RestMethod -Uri "http://localhost:8000/api/v1/items" `
+  -Headers @{
+    "token" = "fake-super-secret-token"
+  }
 ```
 
 ---
 
-## 🔍 Get Single Item by ID (GET `/api/v1/items/{item_id}`)
+### 🔍 Get Item by ID (GET `/api/v1/items/{item_id}`)
 
 ```powershell
-curl -X GET "http://localhost:8000/api/v1/items/1" `
-     -H "token: fake-super-secret-token"
+Invoke-RestMethod -Uri "http://localhost:8000/api/v1/items/1" `
+  -Headers @{
+    "token" = "fake-super-secret-token"
+  }
 ```
 
 ---
 
-## 👤 Create User (Public, POST `/api/v1/users`)
+### 🔎 Filter Items by Query (GET `/api/v1/items?name=book`)
 
 ```powershell
-curl -X POST "http://localhost:8000/api/v1/users" `
-     -H "Content-Type: application/json" `
-     -d '{"username": "alice", "email": "alice@example.com"}'
+Invoke-RestMethod -Uri "http://localhost:8000/api/v1/items?name=book" `
+  -Headers @{
+    "token" = "fake-super-secret-token"
+  }
 ```
 
 ---
 
-## 👤 Get All Users (Auth Required)
+## 👤 Users Endpoints
+
+### ✅ Create User (POST `/api/v1/users`)
 
 ```powershell
-curl -X GET "http://localhost:8000/api/v1/users" `
-     -H "token: fake-super-secret-token"
+Invoke-RestMethod -Uri "http://localhost:8000/api/v1/users" `
+  -Method Post `
+  -Headers @{
+    "Content-Type" = "application/json"
+  } `
+  -Body '{"username": "john", "email": "john@example.com"}'
 ```
 
 ---
 
-## 👤 Get User by ID (Auth Required)
+### 🔐 Get All Users (GET `/api/v1/users`)
 
 ```powershell
-curl -X GET "http://localhost:8000/api/v1/users/1" `
-     -H "token: fake-super-secret-token"
+Invoke-RestMethod -Uri "http://localhost:8000/api/v1/users" `
+  -Headers @{
+    "token" = "fake-super-secret-token"
+  }
+```
+
+---
+
+### 🔐 Get User by ID (GET `/api/v1/users/1`)
+
+```powershell
+Invoke-RestMethod -Uri "http://localhost:8000/api/v1/users/1" `
+  -Headers @{
+    "token" = "fake-super-secret-token"
+  }
 ```
