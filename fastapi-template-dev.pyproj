@@ -22,6 +22,11 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="src\app\api\v1\users.py" />
+    <Compile Include="src\app\models\base_class.py" />
+    <Compile Include="src\app\models\user.py" />
+    <Compile Include="src\app\schemas\user.py" />
+    <Compile Include="src\app\services\user_service.py" />
     <Compile Include="src\run.py" />
     <Compile Include="src\app\api\v1\items.py" />
     <Compile Include="src\app\core\config.py" />
@@ -31,9 +36,11 @@
     <Compile Include="src\app\models\item.py" />
     <Compile Include="src\app\schemas\item.py" />
     <Compile Include="src\app\services\item_service.py" />
+    <Compile Include="src\scripts\reset_db.py" />
     <Compile Include="tests\test_main.py" />
     <Compile Include="src\scripts\initialize_db.py" />
     <Compile Include="tests\test_items.py" />
+    <Compile Include="tests\test_users.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\app\" />
