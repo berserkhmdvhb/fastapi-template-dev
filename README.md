@@ -207,7 +207,6 @@ token: fake-super-secret-token
 | Task                                | Purpose                         |
 |-------------------------------------|---------------------------------|
 | 🔐 Add OAuth2 + JWT auth            | Secure real users               |
-| 👥 Add CRUD for Users or Posts      | Demonstrate relationships       |
 | 🛢 Add Alembic migrations           | Safer schema evolution          |
 | 🐳 Add Dockerfile + docker-compose  | Simplified deployment           |
 | ☁️ Deploy to Render / Azure / Railway | Live demo hosting              |
