@@ -165,6 +165,11 @@ Open browser:
 - API: http://localhost:8000
 - Docs: http://localhost:8000/docs
 
+To run the CRUD methods in the server, you need to insert the following token:
+`fake-super-secret-token`
+
+
+
 ---
 
 ## 🔐 Simulated Authentication
