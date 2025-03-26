@@ -41,3 +41,18 @@ def test_list_items_unauthenticated():
 def test_invalid_route():
     response = client.get("/api/v1/invalid")
     assert response.status_code == 404
+
+def test_get_single_item():
+    # Create item
+    create_response = client.post(
+        BASE_URL,
+        json={"name": "Test Item", "description": "Test Desc"},
+        headers=HEADERS
+    )
+    assert create_response.status_code == 201
+    item_id = create_response.json()["id"]
+
+    # Fetch it back
+    get_response = client.get(f"{BASE_URL}/{item_id}", headers=HEADERS)
+    assert get_response.status_code == 200
+    assert get_response.json()["id"] == item_id

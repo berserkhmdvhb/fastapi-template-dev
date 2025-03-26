@@ -17,3 +17,10 @@ def get_all_items():
     items = db.query(Item).all()
     db.close()
     return items
+
+def get_item_by_id(item_id: int) -> Item | None:
+    db: Session = SessionLocal()
+    try:
+        return db.query(Item).filter(Item.id == item_id).first()
+    finally:
+        db.close()
