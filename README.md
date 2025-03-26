@@ -23,24 +23,25 @@ The design was adhered as much as possible to [Best Practices](https://github.co
 fastapi-template-dev/
 ├── src/
 │   ├── app/
-│   │   ├── api/              ← Route handlers (v1)
-│   │   ├── core/             ← App config, settings
-│   │   ├── db/               ← Database connection/session
+│   │   ├── api/              ← Route handlers (versioned, e.g., v1)
+│   │   ├── core/             ← App config and environment settings
+│   │   ├── db/               ← Database connection/session management
 │   │   ├── dependencies/     ← Dependency injections (e.g., auth)
-│   │   ├── models/           ← SQLAlchemy models
-│   │   ├── schemas/          ← Pydantic models
-│   │   ├── services/         ← Business logic layer
-│   │   └── main.py           ← FastAPI app instance
+│   │   ├── models/           ← SQLAlchemy ORM models
+│   │   ├── schemas/          ← Pydantic request/response models
+│   │   ├── services/         ← Business logic and DB operations
+│   │   └── main.py           ← FastAPI app instantiation
 │   └── scripts/
-│       └── initialize_db.py  ← Creates tables
-├── tests/                    ← Unit test files
-│   ├── test_items.py
-    ├── test_users.py
-│   └── test_main.py
-├── .env.example              ← Environment config sample
-├── requirements.txt          ← Dependencies
-├── pytest.ini                ← Pytest config (for path resolution)
-└── README.md
+│       ├── initialize_db.py  ← Initializes DB schema
+│       └── reset_db.py       ← Clears tables (for testing/dev)
+├── tests/                    ← Unit tests
+│   ├── test_items.py         ← Tests for /items endpoints
+│   ├── test_users.py         ← Tests for /users endpoints
+│   └── test_main.py          ← Base app and docs tests
+├── .env.example              ← Sample environment variables
+├── requirements.txt          ← Python dependencies
+├── pytest.ini                ← Pytest config (e.g., path resolution)
+└── README.md                 ← Project documentation
 ```
 
 ---
