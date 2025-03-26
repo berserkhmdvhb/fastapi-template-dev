@@ -1,40 +1,30 @@
-import sys
 import os
-from sqlalchemy import text
+import sys
 
-# Add root of 'src/' to sys.path so 'app' becomes importable
+# Add root of 'src/' to sys.path
 current_dir = os.path.dirname(__file__)
 source_dir = os.path.abspath(os.path.join(current_dir, ".."))
 sys.path.append(source_dir)
 
-from app.db.session import SessionLocal
-from app.models.item import Item
-from app.models.user import User
+from app.db.session import engine
+from app.models import user, item  # Ensure models are imported so tables are known
+from sqlalchemy.orm import declarative_base
 
-def reset_tables():
-    print("Resetting database tables...")
+Base = user.Base  # Reuse the same Base from your models
 
-    db = SessionLocal()
+DB_PATH = "test_db.db"
 
-    try:
-        db.execute(text("DELETE FROM items"))
-        db.execute(text("DELETE FROM users"))
-        db.commit()
+def reset_db_file():
+    print("Resetting database...")
 
-        # Reset AUTOINCREMENT (SQLite only, skip if not supported)
-        try:
-            db.execute(text("DELETE FROM sqlite_sequence WHERE name='items'"))
-            db.execute(text("DELETE FROM sqlite_sequence WHERE name='users'"))
-            db.commit()
-        except Exception:
-            print("Skipped AUTOINCREMENT reset (sqlite_sequence not found)")
+    # Step 1: Delete the existing DB file if it exists
+    if os.path.exists(DB_PATH):
+        os.remove(DB_PATH)
+        print("Deleted old test_db.db")
 
-        print("Tables truncated.")
-    except Exception as e:
-        db.rollback()
-        print(f"Error during reset: {e}")
-    finally:
-        db.close()
+    # Step 2: Recreate tables
+    Base.metadata.create_all(bind=engine)
+    print("Recreated DB schema")
 
 if __name__ == "__main__":
-    reset_tables()
+    reset_db_file()

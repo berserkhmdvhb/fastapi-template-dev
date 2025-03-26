@@ -3,7 +3,7 @@ from app.main import app
 
 client = TestClient(app)
 BASE_URL = "/api/v1/users"
-HEADERS = {"token": "fake-super-secret-token"}  # Simulated auth token
+HEADERS = {"token": "fake-super-secret-token"}
 
 def test_create_user_with_auth():
     """Creating a user with valid token should succeed."""

@@ -1,11 +1,12 @@
 from pydantic import BaseModel, ConfigDict
+from typing import Optional
 
 class ItemBase(BaseModel):
     name: str
-    description: str | None = None
+    description: Optional[str] = None
 
 class ItemCreate(ItemBase):
-    pass
+    owner_id: Optional[int] = None
 
 class ItemRead(ItemBase):
     id: int

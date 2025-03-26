@@ -12,15 +12,24 @@ def create_item(item_data: ItemCreate):
     db.close()
     return db_item
 
-def get_all_items():
-    db: Session = SessionLocal()
-    items = db.query(Item).all()
-    db.close()
-    return items
+def get_all_items(name: str | None = None, description: str | None = None):
+    db = SessionLocal()
+    try:
+        query = db.query(Item)
+        if name:
+            query = query.filter(Item.name.ilike(f"%{name}%"))
+        if description:
+            query = query.filter(Item.description.ilike(f"%{description}%"))
+        return query.all()
+    finally:
+        db.close()
 
-def get_item_by_id(item_id: int) -> Item | None:
+def get_item_by_id(item_id: int, name: str | None = None) -> Item | None:
     db: Session = SessionLocal()
     try:
-        return db.query(Item).filter(Item.id == item_id).first()
+        query = db.query(Item).filter(Item.id == item_id)
+        if name:
+            query = query.filter(Item.name.ilike(f"%{name}%"))
+        return query.first()
     finally:
         db.close()

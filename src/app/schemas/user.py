@@ -1,5 +1,5 @@
-from typing import List, Optional
-from pydantic import BaseModel, EmailStr
+from typing import List
+from pydantic import BaseModel, EmailStr, Field
 from app.schemas.item import ItemRead
 
 class UserBase(BaseModel):
@@ -11,11 +11,11 @@ class UserCreate(UserBase):
 
 class UserRead(UserBase):
     id: int
-    # replaces orm_mode
+
     class Config:
-        from_attributes = True  
+        from_attributes = True
 
 class UserWithItems(UserRead):
-    items: List[ItemRead] = []
-# needed for forward refs
-UserWithItems.model_rebuild()  
+    items: List[ItemRead] = Field(default_factory=list)
+
+UserWithItems.model_rebuild()

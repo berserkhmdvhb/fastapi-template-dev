@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, selectinload
 from app.models.user import User
 from app.schemas.user import UserCreate
 from app.db.session import SessionLocal
@@ -20,6 +20,23 @@ def get_all_users():
 
 def get_user_by_id(user_id: int):
     db: Session = SessionLocal()
-    user = db.query(User).filter(User.id == user_id).first()
-    db.close()
-    return user
+    try:
+        user = db.query(User)\
+            .options(selectinload(User.items))\
+            .filter(User.id == user_id)\
+            .first()
+        return user
+    finally:
+        db.close()
+
+def get_user_by_username(username: str) -> User | None:
+    db: Session = SessionLocal()
+    try:
+        # Fetch user by username and include their items
+        user = db.query(User)\
+            .options(selectinload(User.items))\
+            .filter(User.username == username)\
+            .first()
+        return user
+    finally:
+        db.close()
