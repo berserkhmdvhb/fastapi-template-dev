@@ -24,6 +24,7 @@
   <ItemGroup>
     <Compile Include="src\app\api\v1\users.py" />
     <Compile Include="src\app\models\base_class.py" />
+    <Compile Include="src\app\models\item.py" />
     <Compile Include="src\app\models\user.py" />
     <Compile Include="src\app\schemas\user.py" />
     <Compile Include="src\app\services\user_service.py" />
@@ -33,7 +34,6 @@
     <Compile Include="src\app\db\session.py" />
     <Compile Include="src\app\dependencies\auth.py" />
     <Compile Include="src\app\main.py" />
-    <Compile Include="src\app\models\item.py" />
     <Compile Include="src\app\schemas\item.py" />
     <Compile Include="src\app\services\item_service.py" />
     <Compile Include="src\scripts\reset_db.py" />
