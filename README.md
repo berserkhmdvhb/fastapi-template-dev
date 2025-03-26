@@ -54,58 +54,66 @@ graph TD
     Uvicorn --> AppMain["🚀 app.main.py<br/>FastAPI App"]
 
     %% App Layer
-    AppMain --> Router["📦 api.v1.items.py<br/>Routes"]
+    AppMain --> ItemRouter["📦 api.v1.items.py<br/>Item Routes"]
+    AppMain --> UserRouter["👤 api.v1.users.py<br/>User Routes"]
     AppMain --> Settings["⚙️ core.config.py<br/>Settings"]
 
-    %% Router Layer
-    Router --> Schemas["🧾 schemas.item.py"]
-    Router --> Service["🧠 services.item_service.py"]
-    Router --> Auth["🔐 dependencies.auth.py"]
+    %% Routers
+    ItemRouter --> ItemSchemas["🧾 schemas.item.py"]
+    ItemRouter --> ItemService["🧠 services.item_service.py"]
+    ItemRouter --> Auth["🔐 dependencies.auth.py"]
 
-    %% Service Layer
-    Service --> Session["🔗 db.session.py"]
-    Service --> ORM["🧱 models.item.py"]
+    UserRouter --> UserSchemas["🧾 schemas.user.py"]
+    UserRouter --> UserService["🧠 services.user_service.py"]
+    UserRouter --> Auth
 
-    %% Database
-    ORM --> DB["🗄️ SQLite Database (test.db)"]
+    %% Services to DB
+    ItemService --> Session["🔗 db.session.py"]
+    UserService --> Session
+
+    ItemService --> ItemModel["🧱 models.item.py"]
+    UserService --> UserModel["👤 models.user.py"]
+
+    ItemModel --> DB["🗄️ SQLite (test_db.db)"]
+    UserModel --> DB
 ```
 ### Request Flow
 
 ```mermaid
 sequenceDiagram
     autonumber
-    participant Client as 🧑‍💻 Browser (User)
+    participant Client as 🧑‍💻 Client (User)
     participant Uvicorn as 🌀 Uvicorn (ASGI Server)
     participant FastAPI as 🚀 FastAPI App
-    participant Router as 🔁 items.py (Router)
+    participant Router as 🔁 users.py (Router)
     participant Auth as 🔐 get_current_user (Dependency)
-    participant Service as 🧠 item_service.py
-    participant Session as 🔗 db.session (Session)
-    participant Model as 🧱 Item (Model)
-    participant SQLite as 🗄️ SQLite DB
+    participant Service as 🧠 user_service.py
+    participant Session as 🔗 db.session
+    participant Model as 👤 User (Model)
+    participant DB as 🗄️ SQLite DB
 
-    Note over Client: User sends GET /api/v1/items
+    Note over Client: User sends GET /api/v1/users with auth token
 
-    Client->>Uvicorn: HTTP request to /api/v1/items
-    Uvicorn->>FastAPI: Pass ASGI scope
+    Client->>Uvicorn: HTTP request (GET /api/v1/users)
+    Uvicorn->>FastAPI: ASGI scope
 
-    FastAPI->>Router: Route match: /api/v1/items
-    Router->>Auth: Validate auth token (Depends)
-    Auth-->>Router: Valid user or HTTP 401
+    FastAPI->>Router: Match route & method
+    Router->>Auth: Depends(get_current_user)
+    Auth-->>Router: ✅ Authorized or ❌ 401
 
-    Router->>Service: Call get_all_items()
-    Service->>Session: Open DB session
-    Service->>Model: ORM query (Item.query.all)
-    Model->>SQLite: SELECT * FROM items
-    SQLite-->>Model: Return rows
-    Model-->>Service: List[Item]
+    Router->>Service: Call get_all_users()
+    Service->>Session: Start DB session
+    Service->>Model: ORM query User.all()
+    Model->>DB: SELECT * FROM users
+    DB-->>Model: Return rows
+    Model-->>Service: List[User]
 
     Service->>Session: Close session
-    Service-->>Router: Return List[ItemRead]
-    Router-->>FastAPI: Response (200 + JSON)
+    Service-->>Router: Return List[UserRead]
 
-    FastAPI->>Uvicorn: Send HTTP response
-    Uvicorn->>Client: Return JSON list
+    Router-->>FastAPI: JSON Response (200 OK)
+    FastAPI->>Uvicorn: Return response
+    Uvicorn->>Client: JSON List
 ```
 ---
 ## 🧪 Tests
