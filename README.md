@@ -35,6 +35,7 @@ fastapi-template-dev/
 │       └── initialize_db.py  ← Creates tables
 ├── tests/                    ← Unit test files
 │   ├── test_items.py
+    ├── test_users.py
 │   └── test_main.py
 ├── .env.example              ← Environment config sample
 ├── requirements.txt          ← Dependencies
