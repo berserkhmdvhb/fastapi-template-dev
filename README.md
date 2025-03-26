@@ -180,6 +180,14 @@ Add this header to your requests to access protected routes:
 token: fake-super-secret-token
 ```
 
+### User Endpoint Access Summary
+
+| Endpoint             | Method | Auth Required | Description                          |
+|----------------------|--------|---------------|--------------------------------------|
+| `/users/`            | POST   | ❌ No         | Create a new user                    |
+| `/users/`            | GET    | ✅ Yes        | List all users                       |
+| `/users/{user_id}`   | GET    | ✅ Yes        | Retrieve a user with their items     |
+
 ---
 
 ## 🧱 Tech Stack
