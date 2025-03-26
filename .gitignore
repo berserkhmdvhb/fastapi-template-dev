@@ -10,6 +10,7 @@ venv/
 # === Environment config ===
 .env
 .env.*
+!.env.example
 
 # === SQLite or test DBs ===
 *.db
