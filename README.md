@@ -155,10 +155,10 @@ In terminal, run following:
 uvicorn app.main:app --reload --app-dir src
 ```
 
-You can also simply run following command instead:
+You can also simply run following command instead, from the root directory of project:
 
 ```bash
-python run.py
+python .\src\run.py
 ```
 
 Open browser:
