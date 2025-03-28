@@ -19,7 +19,7 @@ Make sure your FastAPI server is running at [http://localhost:8000](http://local
 
 ## 📦 Items Endpoints
 
-### ✅ Create Item (POST `/api/v1/items`)
+### 📃 Create Item (POST `/api/v1/items`)
 
 ```powershell
 Invoke-RestMethod -Uri "http://localhost:8000/api/v1/items" `
@@ -33,7 +33,7 @@ Invoke-RestMethod -Uri "http://localhost:8000/api/v1/items" `
 
 ---
 
-### 📃 Get All Items (GET `/api/v1/items`)
+### 🔍 Get All Items (GET `/api/v1/items`)
 
 ```powershell
 Invoke-RestMethod -Uri "http://localhost:8000/api/v1/items" `
@@ -55,7 +55,7 @@ Invoke-RestMethod -Uri "http://localhost:8000/api/v1/items/1" `
 
 ---
 
-### 🔎 Filter Items by Query (GET `/api/v1/items?name=book`)
+### 🔍 Filter Items by Query (GET `/api/v1/items?name=book`)
 
 ```powershell
 Invoke-RestMethod -Uri "http://localhost:8000/api/v1/items?name=book" `
@@ -68,7 +68,7 @@ Invoke-RestMethod -Uri "http://localhost:8000/api/v1/items?name=book" `
 
 ## 👤 Users Endpoints
 
-### ✅ Create User (POST `/api/v1/users`)
+### 📃 Create User (POST `/api/v1/users`)
 
 ```powershell
 Invoke-RestMethod -Uri "http://localhost:8000/api/v1/users" `
@@ -81,7 +81,7 @@ Invoke-RestMethod -Uri "http://localhost:8000/api/v1/users" `
 
 ---
 
-### 🔐 Get All Users (GET `/api/v1/users`)
+### 🔍 Get All Users (GET `/api/v1/users`)
 
 ```powershell
 Invoke-RestMethod -Uri "http://localhost:8000/api/v1/users" `
@@ -92,7 +92,7 @@ Invoke-RestMethod -Uri "http://localhost:8000/api/v1/users" `
 
 ---
 
-### 🔐 Get User by ID (GET `/api/v1/users/1`)
+### 🔍 Get User by ID (GET `/api/v1/users/1`)
 
 ```powershell
 Invoke-RestMethod -Uri "http://localhost:8000/api/v1/users/1" `
