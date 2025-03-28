@@ -130,6 +130,8 @@ All tests currently pass. Test files cover:
 - CRUD endpoints
 - Error cases (missing tokens, invalid routes)
 
+To test endpoints manually, you can run the codes in [testing](docs/testing/README.md) page.
+
 ---
 
 ## ⚙️ Setup & Run Locally
