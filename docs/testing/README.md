@@ -5,7 +5,6 @@ Besides unit tests, one can test endpoints with following CURL commands:
 This markdown file documents how to test your FastAPI CRUD endpoints using `Invoke-RestMethod` in PowerShell (instead of Bash `curl`).  
 Make sure your FastAPI server is running at [http://localhost:8000](http://localhost:8000).
 
----
 
 ## 🔐 Authentication Header
 
@@ -31,7 +30,6 @@ Invoke-RestMethod -Uri "http://localhost:8000/api/v1/items" `
   -Body '{"name": "Notebook", "description": "A lined paper notebook"}'
 ```
 
----
 
 ### 🔍 Get All Items (GET `/api/v1/items`)
 
@@ -42,8 +40,6 @@ Invoke-RestMethod -Uri "http://localhost:8000/api/v1/items" `
   }
 ```
 
----
-
 ### 🔍 Get Item by ID (GET `/api/v1/items/{item_id}`)
 
 ```powershell
@@ -52,8 +48,6 @@ Invoke-RestMethod -Uri "http://localhost:8000/api/v1/items/1" `
     "token" = "fake-super-secret-token"
   }
 ```
-
----
 
 ### 🔍 Filter Items by Query (GET `/api/v1/items?name=book`)
 
@@ -79,7 +73,6 @@ Invoke-RestMethod -Uri "http://localhost:8000/api/v1/users" `
   -Body '{"username": "john", "email": "john@example.com"}'
 ```
 
----
 
 ### 🔍 Get All Users (GET `/api/v1/users`)
 
@@ -90,7 +83,6 @@ Invoke-RestMethod -Uri "http://localhost:8000/api/v1/users" `
   }
 ```
 
----
 
 ### 🔍 Get User by ID (GET `/api/v1/users/1`)
 
