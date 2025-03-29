@@ -25,7 +25,7 @@ fastapi-template-dev/
 │   ├── app/
 │   │   ├── api/              ← Route handlers (versioned, e.g., v1)
 │   │   ├── core/             ← App config and environment settings
-│   │   ├── db/               ← Database connection/session management
+│   │   ├── db/               ← Database connection/session management (SQLite)
 │   │   ├── dependencies/     ← Dependency injections (e.g., auth)
 │   │   ├── models/           ← SQLAlchemy ORM models
 │   │   ├── schemas/          ← Pydantic request/response models
@@ -162,8 +162,16 @@ cp .env.example .env
 
 ### 3. Initialize the Database
 
+The following code creates the database schema with default tables:
+
 ```bash
 python src/scripts/initialize_db.py
+```
+
+If you need to clean the database (e.g., during testing) and truncate the tables, you can run the following script to clear the tables:
+
+```bash
+python src/scripts/reset_db.py
 ```
 
 ### 4. Run the Server
@@ -203,6 +211,10 @@ Add this header to your requests to access protected routes:
 ```
 token: fake-super-secret-token
 ```
+
+This token is checked by the `get_current_user` dependency to simulate authentication in the development environment. If the token is missing or incorrect, you will receive a 401 Unauthorized error. This is used for testing protected routes like the `POST /items/` and `GET /users/` endpoints.
+
+
 ### Item Endpoint Access Summary
 
 | Endpoint             | Method | Auth Required | Description                     |
