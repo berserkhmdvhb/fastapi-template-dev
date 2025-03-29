@@ -80,7 +80,7 @@ graph TD
 
     %% Abstract service calls
     Auth -->|uses| UserService["🧠 services.user_service.py"]
-    UserService -->|calls| get_user_by_username["🔍 get_user_by_username"]
+    UserService -->|handles| UserOperations["📋 User Operations (authentication & management)"]
     ItemService -->|handles| ItemOperations["📋 Item Operations (create, read, update, delete)"]
 ```
 ### Request Flow
