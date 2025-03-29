@@ -77,6 +77,10 @@ graph TD
 
     ItemModel --> DB["🗄️ SQLite (test_db.db)"]
     UserModel --> DB
+
+    %% New user retrieval flow
+    Auth -->|uses| UserService["🧠 services.user_service.py"]
+    UserService -->|calls| get_user_by_username["🔍 get_user_by_username"]
 ```
 ### Request Flow
 
@@ -115,6 +119,12 @@ sequenceDiagram
     Router-->>FastAPI: JSON Response (200 OK)
     FastAPI->>Uvicorn: Return response
     Uvicorn->>Client: JSON List
+
+    %% Add the user retrieval part
+    Auth->>UserService: Calls get_user_by_username(token)
+    UserService->>DB: SELECT * FROM users WHERE username = token
+    DB-->>UserService: Return User
+    UserService-->>Auth: Return User object
 ```
 ---
 ## 🧪 Tests
