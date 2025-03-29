@@ -77,10 +77,11 @@ graph TD
     Auth1 --> UserService
     Auth2 --> UserService
 
-    %% Services & DB
-    UserService --> DBSession1["🔗 db.session"]
-    ItemService --> DBSession2["🔗 db.session"]
+    %% Shared DB Session
+    UserService --> DBSession["🔗 db.session"]
+    ItemService --> DBSession
 
+    %% Models & DB
     UserService --> UserModel["👤 models.user.py"]
     ItemService --> ItemModel["🧱 models.item.py"]
 
