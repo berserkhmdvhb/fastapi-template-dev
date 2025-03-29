@@ -108,7 +108,7 @@ sequenceDiagram
     Router->>Auth: Depends(get_current_user)
     Auth-->>Router: ✅ Authorized or ❌ 401
 
-    Router->>ItemService: Call Item Operations (create, read, update, delete)
+    Router->>ItemService: Call Item Operations (CRUD)
     ItemService->>Session: Start DB session
     ItemService->>Model: ORM query Item.all() (or other operations)
     Model->>DB: Execute query (SELECT * FROM items)
