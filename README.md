@@ -2,7 +2,7 @@
 ![Language](https://img.shields.io/badge/Language-Python%203.9+-yellow)
 ![Database](https://img.shields.io/badge/Database-SQLite%20%7C%20SQLAlchemy-green)
 
-# 🚀 FastAPI Template Project
+# FastAPI Template Project
 
 A production-ready, modular FastAPI backend template with:
 
