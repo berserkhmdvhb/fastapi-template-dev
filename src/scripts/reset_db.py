@@ -7,22 +7,22 @@ source_dir = os.path.abspath(os.path.join(current_dir, ".."))
 sys.path.append(source_dir)
 
 from app.db.session import engine
-from app.models import user, item  # Ensure models are imported so tables are known
+from app.models import user, item
 from sqlalchemy.orm import declarative_base
 
-Base = user.Base  # Reuse the same Base from your models
+Base = user.Base
 
 DB_PATH = "test_db.db"
 
 def reset_db_file():
     print("Resetting database...")
 
-    # Step 1: Delete the existing DB file if it exists
+    # Delete the existing DB file if it exists
     if os.path.exists(DB_PATH):
         os.remove(DB_PATH)
         print("Deleted old test_db.db")
 
-    # Step 2: Recreate tables
+    # Recreate tables
     Base.metadata.create_all(bind=engine)
     print("Recreated DB schema")
 

@@ -20,7 +20,8 @@ def test_create_item_missing_name():
         json={"description": "Missing name field"},
         headers=HEADERS
     )
-    assert response.status_code == 422  # Unprocessable Entity
+    # Unprocessable Entity
+    assert response.status_code == 422  
 
 def test_create_item_no_token():
     response = client.post(
@@ -43,7 +44,6 @@ def test_invalid_route():
     assert response.status_code == 404
 
 def test_get_single_item():
-    # Create item
     create_response = client.post(
         BASE_URL,
         json={"name": "Test Item", "description": "Test Desc"},
@@ -52,7 +52,6 @@ def test_get_single_item():
     assert create_response.status_code == 201
     item_id = create_response.json()["id"]
 
-    # Fetch it back
     get_response = client.get(f"{BASE_URL}/{item_id}", headers=HEADERS)
     assert get_response.status_code == 200
     assert get_response.json()["id"] == item_id

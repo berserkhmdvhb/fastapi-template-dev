@@ -10,7 +10,8 @@ def test_root():
     If later defined, update this to match expected response.
     """
     response = client.get("/")
-    assert response.status_code == 404  # Change this if you add a root route
+    # Change this if you add a root route
+    assert response.status_code == 404  
 
 def test_docs_available():
     """Swagger UI (/docs) should be available and return HTML."""
