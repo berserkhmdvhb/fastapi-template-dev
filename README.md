@@ -91,41 +91,36 @@ sequenceDiagram
     participant Client as 🧑‍💻 Client (User)
     participant Uvicorn as 🌀 Uvicorn (ASGI Server)
     participant FastAPI as 🚀 FastAPI App
-    participant Router as 🔁 users.py (Router)
+    participant Router as 🔁 users.py / items.py (Router)
     participant Auth as 🔐 get_current_user (Dependency)
-    participant Service as 🧠 user_service.py
+    participant UserService as 🧠 user_service.py
+    participant ItemService as 🧠 item_service.py
     participant Session as 🔗 db.session
-    participant Model as 👤 User (Model)
+    participant Model as 🧱 User / Item Model
     participant DB as 🗄️ SQLite DB
 
-    Note over Client: User sends GET /api/v1/users with auth token
+    Note over Client: User sends GET /api/v1/items with auth token
 
-    Client->>Uvicorn: HTTP request (GET /api/v1/users)
+    Client->>Uvicorn: HTTP request (GET /api/v1/items)
     Uvicorn->>FastAPI: ASGI scope
 
     FastAPI->>Router: Match route & method
     Router->>Auth: Depends(get_current_user)
     Auth-->>Router: ✅ Authorized or ❌ 401
 
-    Router->>Service: Call get_all_users()
-    Service->>Session: Start DB session
-    Service->>Model: ORM query User.all()
-    Model->>DB: SELECT * FROM users
+    Router->>ItemService: Call Item Operations (create, read, update, delete)
+    ItemService->>Session: Start DB session
+    ItemService->>Model: ORM query Item.all() (or other operations)
+    Model->>DB: Execute query (SELECT * FROM items)
     DB-->>Model: Return rows
-    Model-->>Service: List[User]
+    Model-->>ItemService: Return list of items
 
-    Service->>Session: Close session
-    Service-->>Router: Return List[UserRead]
+    ItemService->>Session: Close session
+    ItemService-->>Router: Return List[ItemRead] or appropriate result
 
     Router-->>FastAPI: JSON Response (200 OK)
     FastAPI->>Uvicorn: Return response
-    Uvicorn->>Client: JSON List
-
-    %% Add the user retrieval part
-    Auth->>UserService: Calls get_user_by_username(token)
-    UserService->>DB: SELECT * FROM users WHERE username = token
-    DB-->>UserService: Return User
-    UserService-->>Auth: Return User object
+    Uvicorn->>Client: JSON List or Data
 ```
 ---
 ## 🧪 Tests
