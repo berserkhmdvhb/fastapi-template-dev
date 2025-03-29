@@ -51,41 +51,34 @@ fastapi-template-dev/
 
 ```mermaid
 graph TD
-    %% Entry
+    %% Entry Point
     Run["▶️ run.py"] --> Uvicorn["🌀 Uvicorn (ASGI Server)"]
     Uvicorn --> App["🚀 app.main.py"]
 
-    %% App Layer
+    %% App Core
     App --> Config["⚙️ core.config.py"]
-    App --> UsersRouter["👤 users.py"]
-    App --> ItemsRouter["📦 items.py"]
+    App --> UsersRouter["👤 api/v1/users.py"]
+    App --> ItemsRouter["📦 api/v1/items.py"]
 
-    %% Routers
-    subgraph UsersRouterBlock["User Router Block"]
-        UsersRouter --> UserSchemas["🧾 schemas.user.py"]
-        UsersRouter --> UserService["🧠 user_service.py"]
-        UsersRouter --> Auth1["🔐 auth.py"]
-    end
+    %% Routers to Shared Layers
+    UsersRouter --> UserSchemas["🧾 schemas.user.py"]
+    UsersRouter --> UserService["🧠 user_service.py"]
+    UsersRouter --> Auth["🔐 dependencies.auth.py"]
 
-    subgraph ItemsRouterBlock["Item Router Block"]
-        ItemsRouter --> ItemSchemas["🧾 schemas.item.py"]
-        ItemsRouter --> ItemService["🧠 item_service.py"]
-        ItemsRouter --> Auth2["🔐 auth.py"]
-    end
+    ItemsRouter --> ItemSchemas["🧾 schemas.item.py"]
+    ItemsRouter --> ItemService["🧠 item_service.py"]
+    ItemsRouter --> Auth
 
-    %% Auth
-    Auth1 --> UserService
-    Auth2 --> UserService
-
-    %% Shared DB Session
-    UserService --> DBSession["🔗 db.session"]
+    %% Services to Shared DB
+    UserService --> DBSession["🔗 db.session.py"]
     ItemService --> DBSession
 
-    %% Models & DB
+    %% Services to Models
     UserService --> UserModel["👤 models.user.py"]
     ItemService --> ItemModel["🧱 models.item.py"]
 
-    UserModel --> SQLite["🗄️ SQLite DB"]
+    %% Models to DB
+    UserModel --> SQLite["🗄️ SQLite (test_db.db)"]
     ItemModel --> SQLite
 
     %% Abstract Logic
