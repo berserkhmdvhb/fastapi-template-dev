@@ -1,6 +1,6 @@
 Besides unit tests, one can test endpoints with following CURL commands:
 
-# 🧪 FastAPI CRUD API Test Commands (PowerShell Compatible)
+# 🧪 FastAPI CRUD API Test Commands (PowerShell and Bash Compatible)
 
 This markdown file documents how to test your FastAPI CRUD endpoints using `Invoke-RestMethod` in PowerShell (instead of Bash `curl`).  
 Make sure your FastAPI server is running at [http://localhost:8000](http://localhost:8000).
@@ -13,6 +13,8 @@ Make sure your FastAPI server is running at [http://localhost:8000](http://local
 ```powershell
 "token" = "fake-super-secret-token"
 ```
+
+
 
 ---
 
