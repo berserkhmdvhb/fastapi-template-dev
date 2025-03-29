@@ -78,9 +78,10 @@ graph TD
     ItemModel --> DB["🗄️ SQLite (test_db.db)"]
     UserModel --> DB
 
-    %% New user retrieval flow
+    %% Abstract service calls
     Auth -->|uses| UserService["🧠 services.user_service.py"]
     UserService -->|calls| get_user_by_username["🔍 get_user_by_username"]
+    ItemService -->|handles| ItemOperations["📋 Item Operations (create, read, update, delete)"]
 ```
 ### Request Flow
 
