@@ -56,8 +56,6 @@ Invoke-RestMethod -Uri "http://localhost:8000/api/v1/items" `
 curl -X GET "http://localhost:8000/api/v1/items"   -H "token: fake-super-secret-token"
 ```
 
----
-
 ### 🔍 Get Item by ID (GET `/api/v1/items/{item_id}`)
 
 #### PowerShell:
