@@ -6,7 +6,7 @@
 
 A production-ready, modular FastAPI backend template with:
 
-- Microservices project architecture (versioned API, services, models, schemas, etc.)
+- Modular and scalable architecture (versioned API, services, models, schemas, etc.)
 - Pydantic v2 compatibility
 - SQLAlchemy 2.x support with SQLite
 - Dependency injection & basic auth simulation
