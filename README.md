@@ -51,37 +51,41 @@ fastapi-template-dev/
 
 ```mermaid
 graph TD
+    %% Entry Point
     Run["▶️ run.py<br/>Entry Point"] -->|launches| Uvicorn["🌀 Uvicorn<br/>ASGI Server"]
     Uvicorn --> AppMain["🚀 app.main.py<br/>FastAPI App"]
 
-    %% App Layer
-    AppMain --> ItemRouter["📦 api.v1.items.py<br/>Item Routes"]
-    AppMain --> UserRouter["👤 api.v1.users.py<br/>User Routes"]
+    %% App Layer - routes and config
     AppMain --> Settings["⚙️ core.config.py<br/>Settings"]
+    AppMain --> UserRouter["👤 users.py<br/>User Routes"]
+    AppMain --> ItemRouter["📦 items.py<br/>Item Routes"]
 
-    %% Routers
-    ItemRouter --> ItemSchemas["🧾 schemas.item.py"]
-    ItemRouter --> ItemService["🧠 services.item_service.py"]
-    ItemRouter --> Auth["🔐 dependencies.auth.py"]
+    %% Routers to Dependencies & Services
+    UserRouter --> UserSchemas["🧾 user schema"]
+    UserRouter --> UserService["🧠 user_service"]
+    UserRouter --> Auth["🔐 auth dependency"]
 
-    UserRouter --> UserSchemas["🧾 schemas.user.py"]
-    UserRouter --> UserService["🧠 services.user_service.py"]
-    UserRouter --> Auth
+    ItemRouter --> ItemSchemas["🧾 item schema"]
+    ItemRouter --> ItemService["🧠 item_service"]
+    ItemRouter --> Auth
 
-    %% Services to DB
-    ItemService --> Session["🔗 db.session.py"]
-    UserService --> Session
+    %% Auth and its service
+    Auth --> UserService
 
-    ItemService --> ItemModel["🧱 models.item.py"]
-    UserService --> UserModel["👤 models.user.py"]
+    %% Services to DB session and models
+    UserService --> Session["🔗 DB session"]
+    ItemService --> Session
 
-    ItemModel --> DB["🗄️ SQLite (test_db.db)"]
-    UserModel --> DB
+    UserService --> UserModel["👤 user model"]
+    ItemService --> ItemModel["🧱 item model"]
 
-    %% Abstract service calls
-    Auth -->|uses| UserService["🧠 services.user_service.py"]
-    UserService -->|handles| UserOperations["📋 User Operations (authentication & management)"]
-    ItemService -->|handles| ItemOperations["📋 Item Operations (CRUD)"]
+    %% DB
+    UserModel --> DB["🗄️ SQLite DB"]
+    ItemModel --> DB
+
+    %% Abstract Logic Layer
+    UserService -->|handles| UserOps["📋 User Ops"]
+    ItemService -->|handles| ItemOps["📋 Item Ops"]
 ```
 ### Request Flow
 
