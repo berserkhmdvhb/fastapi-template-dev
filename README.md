@@ -2,6 +2,7 @@
 ![Language](https://img.shields.io/badge/Language-Python%203.9+-yellow)
 ![Database](https://img.shields.io/badge/Database-SQLite%20%7C%20SQLAlchemy-green)
 
+
 # FastAPI Template Project
 
 A production-ready, modular FastAPI backend template with:
@@ -14,6 +15,29 @@ A production-ready, modular FastAPI backend template with:
 - Future-ready: Docker, OAuth2, Alembic, deployment support
 
 The design was adhered as much as possible to [Best Practices](https://github.com/berserkhmdvhb/API_Python_Test/tree/main/BestPractices).
+
+## Table of Contents
+
+<!-- TOC -->
+- [🗂️ Project Structure](#️-project-structure)
+- [📊 Diagram](#-diagram)
+  - [Overview](#overview)
+  - [Request Flow](#request-flow)
+- [🧪 Tests](#-tests)
+- [⚙️ Setup & Run Locally](#️-setup--run-locally)
+  - [1. Clone & Setup](#1-clone--setup)
+  - [2. Set Environment Variables](#2-set-environment-variables)
+  - [3. Initialize the Database](#3-initialize-the-database)
+  - [4. Run the Server](#4-run-the-server)
+  - [Demo](#demo)
+- [🔐 Simulated Authentication](#-simulated-authentication)
+  - [Item Endpoint Access Summary](#item-endpoint-access-summary)
+  - [User Endpoint Access Summary](#user-endpoint-access-summary)
+- [🧱 Tech Stack](#-tech-stack)
+- [📦 Roadmap / To-Do](#-roadmap--to-do)
+<!-- TOC END -->
+
+
 
 ---
 
