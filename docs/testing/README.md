@@ -1,4 +1,4 @@
-# 🧪 CRUD Endpoint Test Commands
+# 📋 CRUD Endpoint Test Commands
 
 This markdown file documents how to test your FastAPI CRUD endpoints using both `Invoke-RestMethod` in PowerShell and `curl` in Bash.  
 Make sure your FastAPI server is running at [http://localhost:8000](http://localhost:8000).
