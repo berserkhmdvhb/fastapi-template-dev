@@ -228,12 +228,6 @@ Open browser:
 To run the CRUD methods in the server, you need to insert the following token:
 `fake-super-secret-token`
 
-### Demo
-```bash
-curl -X GET http://localhost:8000/api/v1/users \
-  -H "token: fake-super-secret-token"
-```
-
 ---
 
 ## 🔐 Simulated Authentication
