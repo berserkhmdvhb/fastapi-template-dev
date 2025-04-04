@@ -12,7 +12,7 @@ A production-ready, modular FastAPI backend template with:
 - SQLAlchemy 2.x support with SQLite
 - Dependency injection & basic auth simulation
 - Pytest test suite for unit tests
-- Future-ready: Docker, OAuth2, Alembic, deployment support
+- Future steps: Docker, OAuth2, Alembic, deployment support
 
 The design was adhered as much as possible to [Best Practices](https://github.com/berserkhmdvhb/API_Python_Test/tree/main/BestPractices).
 
