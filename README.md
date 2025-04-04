@@ -3,7 +3,7 @@
 ![Database](https://img.shields.io/badge/Database-SQLite%20%7C%20SQLAlchemy-green)
 
 
-# FastAPI Template Project  <img src="logo.png" align="right" style="width: 25%;"/>
+# FastAPI Template Project  <img src="logo.png" align="right" style="width: 15%;"/>
 
 A production-ready, modular FastAPI backend template with:
 
